@@ -20,14 +20,20 @@ def addMotility(numSeconds):
    simulateCells(numSeconds,motilityStrength=c.motilityStrength)
 
 def scoreElectricField(numSeconds,electricField):
-
+   
    positions = simulateAndTrackCells(numSeconds,motilityStrength=0,attractionStrength=c.attractionStrength,electricField=electricField)
-   targets = {'NW': {target: [-c.petriDishWidth/2, c.petriDishWidth/2], score:0}, 
-              'NE': {target: [c.petriDishWidth/2, c.petriDishWidth/2], score:0}, 
-              'SE': {target: [c.petriDishWidth/2, -c.petriDishWidth/2], score:0}, 
-              'SW': {target: [-c.petriDishWidth/2, -c.petriDishWidth/2], score:0}}
+   targets = {'NW': {'target': [-c.petriDishWidth/2, c.petriDishWidth/2], 'score':0}, 
+              'NE': {'target': [c.petriDishWidth/2, c.petriDishWidth/2], 'score':0}, 
+              'SE': {'target': [c.petriDishWidth/2, -c.petriDishWidth/2], 'score':0}, 
+              'SW': {'target': [-c.petriDishWidth/2, -c.petriDishWidth/2], 'score':0}}
    for t in targets.keys():
-      for 
+      for pos in positions:
+         distance = np.sqrt((targets[t]['target'][0] - pos[0])**2 + (targets[t]['target'][1] - pos[1])**2)
+         if distance <= c.cellRadius*5:
+            targets[t]['score'] += 1
+
+   score = np.min([targets[t]['score'] for t in targets.keys()])
+   return(score)
       
 def captureFrame(t,vid):
 
