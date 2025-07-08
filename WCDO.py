@@ -29,6 +29,7 @@ def scoreElectricField(numSeconds,electricField):
    for t in targets.keys():
       for pos in positions:
          distance = np.sqrt((targets[t]['target'][0] - pos[0])**2 + (targets[t]['target'][1] - pos[1])**2)
+         print(distance)
          if distance <= c.cellRadius*5:
             targets[t]['score'] += 1
 
