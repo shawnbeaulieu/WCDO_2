@@ -19,7 +19,7 @@ def addMotility(numSeconds):
 
    simulateCells(numSeconds,motilityStrength=c.motilityStrength)
 
-def scoreElectricField(numSeconds,electricField):
+def scoreElectricField(numSeconds,electricField,verbose=False):
    
    positions = simulateAndTrackCells(numSeconds,motilityStrength=0,attractionStrength=c.attractionStrength,electricField=electricField)
    targets = {'NW': {'target': [-c.petriDishWidth/2, c.petriDishWidth/2], 'score':0}, 
@@ -29,7 +29,8 @@ def scoreElectricField(numSeconds,electricField):
    for t in targets.keys():
       for pos in positions:
          distance = np.sqrt((targets[t]['target'][0] - pos[0])**2 + (targets[t]['target'][1] - pos[1])**2)
-         print(distance)
+         if verbose:
+            print(distance)
          if distance <= c.cellRadius*5:
             targets[t]['score'] += 1
 
