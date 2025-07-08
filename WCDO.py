@@ -199,7 +199,7 @@ def simulateAndTrackCells(numSeconds, motilityStrength = 0 , attractionStrength 
 
    xs = []
    ys = []
-   for objID in objectIDS:
+   for objID in objectIDs:
       pos, orientation = p.getBasePositionAndOrientation(objID)
       xs.append(pos[0])
       ys.append(pos[1])
