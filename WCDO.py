@@ -21,9 +21,14 @@ def addMotility(numSeconds):
 
 def scoreElectricField(numSeconds,electricField):
 
-   xs, ys = simulateAndTrackCells(numSeconds,motilityStrength=0,attractionStrength=c.attractionStrength,electricField=electricField)
-   print(xs,ys)
-
+   positions = simulateAndTrackCells(numSeconds,motilityStrength=0,attractionStrength=c.attractionStrength,electricField=electricField)
+   targets = {'NW': {target: [-c.petriDishWidth/2, c.petriDishWidth/2], score:0}, 
+              'NE': {target: [c.petriDishWidth/2, c.petriDishWidth/2], score:0}, 
+              'SE': {target: [c.petriDishWidth/2, -c.petriDishWidth/2], score:0}, 
+              'SW': {target: [-c.petriDishWidth/2, -c.petriDishWidth/2], score:0}}
+   for t in targets.keys():
+      for 
+      
 def captureFrame(t,vid):
 
    if t%20==0:
@@ -197,15 +202,14 @@ def simulateAndTrackCells(numSeconds, motilityStrength = 0 , attractionStrength 
 
       p.stepSimulation()
 
-   xs = []
-   ys = []
+
+   positions = []
    for objID in objectIDs:
       pos, orientation = p.getBasePositionAndOrientation(objID)
-      xs.append(pos[0])
-      ys.append(pos[1])
+      positions.append([pos[0], pos[1]])
       
    terminate_gracefully(vid)
-   return(xs,ys)
+   return(positions)
 
 def sprinkleCells(numCells):
 
