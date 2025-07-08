@@ -63,7 +63,7 @@ def createElectricField(electricField):
 
 def createRandomElectricField():
 
-   electricField = np.random.choice(range(2), 8)
+   electricField = list(np.random.choice(range(2), 8))
    x    = np.linspace(-c.petriDishWidth/2, c.petriDishWidth/2, 30)
    y    = np.linspace(-c.petriDishWidth/2, c.petriDishWidth/2, 30)
    X, Y = np.meshgrid(x, y)
