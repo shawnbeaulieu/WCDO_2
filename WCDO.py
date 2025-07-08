@@ -1,5 +1,5 @@
 import matplotlib.pyplot as plt
-import WCDO.constants as c
+import WCDO_2.constants as c
 import pyrosim.pyrosim as pyrosim
 import random
 import numpy as np
