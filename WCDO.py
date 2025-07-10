@@ -74,6 +74,40 @@ def createElectricField(electricField):
 
    plt.show()
 
+def mutateElectricField(electricField):
+
+   for i in range(len(electricField)):
+      coinFlip = np.random.random()
+      if coinFlip > 0.5:
+         electricField[i] = electricField[i] + np.random.randn()*0.1
+         
+   x    = np.linspace(-c.petriDishWidth/2, c.petriDishWidth/2, 30)
+   y    = np.linspace(-c.petriDishWidth/2, c.petriDishWidth/2, 30)
+   X, Y = np.meshgrid(x, y)
+
+   fX   =      electricField[0] * X
+   fX   = fX + electricField[1] * Y
+   fX   = fX + electricField[2] * np.sin(X/(c.petriDishWidth/2) * 2.0 * 3.14159)
+   fX   = fX + electricField[3] * np.sin(Y/(c.petriDishWidth/2) * 2.0 * 3.14159)
+
+   fY   =      electricField[4] * X
+   fY   = fY + electricField[5] * Y
+   fY   = fY + electricField[6] * np.sin(X/(c.petriDishWidth/2) * 2.0 * 3.14159)
+   fY   = fY + electricField[7] * np.sin(Y/(c.petriDishWidth/2) * 2.0 * 3.14159)
+
+   magnitude = np.sqrt(fX**2 + fY**2)
+   fX = fX / (magnitude + 1e-8)
+   fY = fY / (magnitude + 1e-8)
+
+   fig, ax = plt.subplots(figsize=(1.5,1.5),dpi=600)
+
+   q = ax.quiver(X, Y, fX, fY, magnitude, cmap='coolwarm', scale=20, alpha=1.0, width=0.003)
+
+   plt.axis('off')
+   plt.show()
+   return(electricField)
+
+
 def createRandomElectricField():
 
    electricField = [np.random.uniform(-1,1) for i in range(8)]
