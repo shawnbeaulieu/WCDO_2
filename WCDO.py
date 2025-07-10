@@ -31,10 +31,11 @@ def scoreElectricField(numSeconds,electricField,verbose=False):
          distance = np.sqrt((targets[t]['target'][0] - pos[0])**2 + (targets[t]['target'][1] - pos[1])**2)
          if verbose:
             print(distance)
-         if distance <= c.cellRadius*5:
-            targets[t]['score'] += 1
-
-   score = np.min([targets[t]['score'] for t in targets.keys()])
+         #if distance <= c.cellRadius*5:
+         targets[t]['score'] += distance
+      targets[t]['score'] /= len(positions)
+      
+   score = np.max([targets[t]['score'] for t in targets.keys()])
    return(score)
       
 def captureFrame(t,vid):
