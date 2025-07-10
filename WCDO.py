@@ -74,12 +74,12 @@ def createElectricField(electricField):
 
    plt.show()
 
-def mutateElectricField(electricField):
+def mutateElectricField(electricField, scale=0.1):
 
    for i in range(len(electricField)):
       coinFlip = np.random.random()
       if coinFlip > 0.5:
-         electricField[i] = electricField[i] + np.random.randn()*0.1
+         electricField[i] = electricField[i] + np.random.randn()*scale
          
    x    = np.linspace(-c.petriDishWidth/2, c.petriDishWidth/2, 30)
    y    = np.linspace(-c.petriDishWidth/2, c.petriDishWidth/2, 30)
