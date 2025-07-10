@@ -75,7 +75,7 @@ def createElectricField(electricField):
 
    plt.show()
 
-def mutateElectricField(electricField, scale=0.1):
+def mutateElectricField(electricField, scale=0.1, visualize=True):
 
    for i in range(len(electricField)):
       coinFlip = np.random.random()
@@ -100,12 +100,14 @@ def mutateElectricField(electricField, scale=0.1):
    fX = fX / (magnitude + 1e-8)
    fY = fY / (magnitude + 1e-8)
 
-   fig, ax = plt.subplots(figsize=(1.5,1.5),dpi=600)
+   if visualize:
+      fig, ax = plt.subplots(figsize=(1.5,1.5),dpi=600)
 
-   q = ax.quiver(X, Y, fX, fY, magnitude, cmap='coolwarm', scale=20, alpha=1.0, width=0.003)
+      q = ax.quiver(X, Y, fX, fY, magnitude, cmap='coolwarm', scale=20, alpha=1.0, width=0.003)
 
-   plt.axis('off')
-   plt.show()
+      plt.axis('off')
+      plt.show()
+      
    return(electricField)
 
 
