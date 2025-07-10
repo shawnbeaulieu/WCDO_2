@@ -19,9 +19,9 @@ def addMotility(numSeconds):
 
    simulateCells(numSeconds,motilityStrength=c.motilityStrength)
 
-def scoreElectricField(numSeconds,electricField,verbose=False):
+def scoreElectricField(numSeconds,electricField,verbose=False, record=True):
    
-   positions = simulateAndTrackCells(numSeconds,motilityStrength=0,attractionStrength=c.attractionStrength,electricField=electricField)
+   positions = simulateAndTrackCells(numSeconds,motilityStrength=0,attractionStrength=c.attractionStrength,electricField=electricField, record=record)
    #targets = {'NW': {'target': [-c.petriDishWidth/2, c.petriDishWidth/2], 'score':0}, 
    #           'NE': {'target': [c.petriDishWidth/2, c.petriDishWidth/2], 'score':0}, 
    #           'SE': {'target': [c.petriDishWidth/2, -c.petriDishWidth/2], 'score':0}, 
