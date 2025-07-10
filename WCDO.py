@@ -223,7 +223,7 @@ def simulateCells(numSeconds, motilityStrength = 0 , attractionStrength = 0 , el
 
    terminate_gracefully(vid)
 
-def simulateAndTrackCells(numSeconds, motilityStrength = 0 , attractionStrength = 0 , electricField = None):
+def simulateAndTrackCells(numSeconds, motilityStrength = 0 , attractionStrength = 0 , electricField = None, record=True):
 
    vid, objectIDs = prep()
  
@@ -241,7 +241,8 @@ def simulateAndTrackCells(numSeconds, motilityStrength = 0 , attractionStrength 
 
          intervene(objectIDs,electricField)
 
-      captureFrame(t,vid)
+      if record:
+         captureFrame(t,vid)
 
       p.stepSimulation()
 
@@ -250,8 +251,9 @@ def simulateAndTrackCells(numSeconds, motilityStrength = 0 , attractionStrength 
    for objID in objectIDs:
       pos, orientation = p.getBasePositionAndOrientation(objID)
       positions.append([pos[0], pos[1]])
-      
-   terminate_gracefully(vid)
+
+   if record:
+      terminate_gracefully(vid)
    return(positions)
 
 def sprinkleCells(numCells):
