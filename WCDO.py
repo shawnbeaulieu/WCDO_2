@@ -159,15 +159,16 @@ def intervene(objectIDs,electricField):
 
       p.applyExternalForce(objID, -1, [ fx , fy , 0 ], [0, 0, 0], p.WORLD_FRAME)
 
-def prep():
+def prep(record=True):
 
    physicsClient = p.connect(p.DIRECT)
    p.setAdditionalSearchPath(pybullet_data.getDataPath())
    # p.setGravity(0, 0, -10)
    plane_id = p.loadURDF("plane.urdf")
 
-   vid = imageio_ffmpeg.write_frames('vid.mp4', (c.cam_width, c.cam_height), fps=30)
-   vid.send(None) # The first frame of the video must be a null frame.
+   if record:
+      vid = imageio_ffmpeg.write_frames('vid.mp4', (c.cam_width, c.cam_height), fps=30)
+      vid.send(None) # The first frame of the video must be a null frame.
 
    objectIDs = p.loadSDF("box.sdf")
 
@@ -175,7 +176,10 @@ def prep():
 
       p.changeVisualShape(objID, -1, rgbaColor=[random.random(), random.random(), random.random(), 1])
 
-   return vid,objectIDs
+   if record:
+      return vid,objectIDs
+   else:
+      return objectIDs
 
 def pullTogether(objectIDs,attractionStrength):
 
@@ -225,7 +229,10 @@ def simulateCells(numSeconds, motilityStrength = 0 , attractionStrength = 0 , el
 
 def simulateAndTrackCells(numSeconds, motilityStrength = 0 , attractionStrength = 0 , electricField = None, record=True):
 
-   vid, objectIDs = prep()
+   if record:
+      vid, objectIDs = prep()
+   else:
+      objectIDs = prep(record)
  
    for t in range(0,625*numSeconds):
 
@@ -254,6 +261,7 @@ def simulateAndTrackCells(numSeconds, motilityStrength = 0 , attractionStrength 
 
    if record:
       terminate_gracefully(vid)
+      
    return(positions)
 
 def sprinkleCells(numCells):
