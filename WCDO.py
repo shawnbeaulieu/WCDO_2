@@ -22,21 +22,21 @@ def addMotility(numSeconds):
 def scoreElectricField(numSeconds,electricField,verbose=False):
    
    positions = simulateAndTrackCells(numSeconds,motilityStrength=0,attractionStrength=c.attractionStrength,electricField=electricField)
-   targets = {'NW': {'target': [-c.petriDishWidth/2, c.petriDishWidth/2], 'score':0}, 
-              'NE': {'target': [c.petriDishWidth/2, c.petriDishWidth/2], 'score':0}, 
-              'SE': {'target': [c.petriDishWidth/2, -c.petriDishWidth/2], 'score':0}, 
-              'SW': {'target': [-c.petriDishWidth/2, -c.petriDishWidth/2], 'score':0}}
-   for t in targets.keys():
-      for pos in positions:
-         distance = np.sqrt((targets[t]['target'][0] - pos[0])**2 + (targets[t]['target'][1] - pos[1])**2)
-         if verbose:
-            print(distance)
+   #targets = {'NW': {'target': [-c.petriDishWidth/2, c.petriDishWidth/2], 'score':0}, 
+   #           'NE': {'target': [c.petriDishWidth/2, c.petriDishWidth/2], 'score':0}, 
+   #           'SE': {'target': [c.petriDishWidth/2, -c.petriDishWidth/2], 'score':0}, 
+   #           'SW': {'target': [-c.petriDishWidth/2, -c.petriDishWidth/2], 'score':0}}
+   #for t in targets.keys():
+   #   for pos in positions:
+   #      distance = np.sqrt((targets[t]['target'][0] - pos[0])**2 + (targets[t]['target'][1] - pos[1])**2)
+   #      if verbose:
+   #         print(distance)
          #if distance <= c.cellRadius*5:
-         targets[t]['score'] += distance
-      targets[t]['score'] /= len(positions)
+   #      targets[t]['score'] += distance
+   #   targets[t]['score'] /= len(positions)
       
-   score = np.max([targets[t]['score'] for t in targets.keys()])
-   return(score)
+   #score = np.max([targets[t]['score'] for t in targets.keys()])
+   return(positions)
       
 def captureFrame(t,vid):
 
